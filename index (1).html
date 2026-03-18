@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#07080F"/>
+  <title>Jon the Dispatcher | Heavy Haul · Open Deck · Dallas TX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --blue:      #2E7DC4;
+      --blue-mid:  #1B5FA0;
+      --red:       #DE3A3A;
+      --red-mid:   #C92A2A;
+      --gold:      #F5B830;
+      --gold-light:#FCCF60;
+      --cream:     #FDE8A8;
+      --bg:        #07080F;
+      --bg2:       #0C0E19;
+      --bg3:       #101424;
+      --g1:  rgba(255,255,255,0.048);
+      --g2:  rgba(255,255,255,0.032);
+      --g-border: rgba(255,255,255,0.09);
+      --g-shine:  rgba(255,255,255,0.12);
+      --text:  #E8EBF4;
+      --dim:   rgba(232,235,244,0.58);
+      --muted: #5A6480;
+      --glow-blue:  rgba(46,125,196,0.30);
+      --glow-red:   rgba(222,58,58,0.28);
+      --glow-gold:  rgba(245,184,48,0.22);
+      --r:   20px;
+      --r-sm:14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* AMBIENT */
+    .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(110px); animation: floatOrb 22s ease-in-out infinite alternate; }
+    .o1 { width:580px; height:580px; top:-240px; left:-180px; background: radial-gradient(circle, rgba(46,125,196,0.32), transparent 70%); animation-delay: 0s; }
+    .o2 { width:460px; height:460px; bottom:-180px; right:-130px; background: radial-gradient(circle, rgba(245,184,48,0.20), transparent 70%); animation-delay: -9s; }
+    .o3 { width:380px; height:380px; top:38%; left:42%; background: radial-gradient(circle, rgba(222,58,58,0.18), transparent 70%); animation-delay: -16s; }
+    .o4 { width:280px; height:280px; top:60%; left:8%; background: radial-gradient(circle, rgba(46,125,196,0.14), transparent 70%); animation-delay: -4s; }
+    @keyframes floatOrb {
+      0%   { transform: translate(0,0) scale(1); }
+      33%  { transform: translate(30px,40px) scale(1.08); }
+      66%  { transform: translate(-20px,25px) scale(0.96); }
+      100% { transform: translate(45px,-20px) scale(1.12); }
+    }
+
+    .grad-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(125deg,#07080F 0%,#0D1020 25%,#0A0C1A 50%,#0D0A14 75%,#07080F 100%);
+      background-size: 400% 400%;
+      animation: gradShift 18s ease infinite;
+    }
+    @keyframes gradShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      padding: 0 20px;
+      padding-top: env(safe-area-inset-top);
+      height: calc(62px + env(safe-area-inset-top));
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(7,8,15,0.52);
+      backdrop-filter: blur(36px) saturate(200%);
+      -webkit-backdrop-filter: blur(36px) saturate(200%);
+      border-bottom: 1px solid rgba(255,255,255,0.065);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 32px rgba(0,0,0,0.4);
+      animation: navIn 0.7s ease both;
+    }
+    @keyframes navIn { from{opacity:0;transform:translateY(-100%)} to{opacity:1;transform:translateY(0)} }
+    .nav-left { display:flex; align-items:center; gap:10px; }
+    .nav-left img { height:38px; filter:drop-shadow(0 0 10px rgba(245,184,48,0.55)); animation: logoGlow 4s ease-in-out infinite alternate; }
+    @keyframes logoGlow {
+      from { filter: drop-shadow(0 0 8px rgba(245,184,48,0.45)); }
+      to   { filter: drop-shadow(0 0 16px rgba(245,184,48,0.75)) drop-shadow(0 0 30px rgba(46,125,196,0.3)); }
+    }
+    .nav-brand {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.09em;
+      background: linear-gradient(110deg, var(--blue), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-size: 200% 100%; animation: brandShimmer 5s ease infinite;
+    }
+    @keyframes brandShimmer { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .nav-cta {
+      padding: 9px 20px; border-radius: 50px;
+      background: rgba(46,125,196,0.14); border: 1px solid rgba(46,125,196,0.38);
+      backdrop-filter: blur(12px); color: var(--blue); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: all 0.28s; white-space: nowrap; position: relative; overflow: hidden;
+    }
+    .nav-cta::before { content:''; position:absolute; inset:0; border-radius:50px; background: linear-gradient(135deg,var(--blue-mid),var(--blue)); opacity:0; transition:opacity 0.28s; }
+    .nav-cta:hover { color:#fff; box-shadow:0 0 22px var(--glow-blue); }
+    .nav-cta:hover::before { opacity:1; }
+    .nav-cta span { position:relative; z-index:1; }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 22px 52px;
+      padding-bottom: calc(52px + env(safe-area-inset-bottom));
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('ronaldplett-transportation-system-3248736_1920.jpg');
+      background-size: cover; background-position: center 30%;
+      filter: brightness(0.20) saturate(0.6); transform: scale(1.05);
+      animation: heroZoom 24s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from{transform:scale(1.05) translateY(0px)} to{transform:scale(1.13) translateY(-15px)} }
+    .hero-ov {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,rgba(7,8,15,0.25) 0%,rgba(7,8,15,0.50) 45%,rgba(7,8,15,0.95) 82%,var(--bg) 100%);
+    }
+    .hero-sweep {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,rgba(46,125,196,0.12) 0%,transparent 50%,rgba(222,58,58,0.10) 100%);
+      animation: sweepShift 12s ease-in-out infinite alternate;
+    }
+    @keyframes sweepShift { from{opacity:0.6} to{opacity:1} }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 50px;
+      background: rgba(46,125,196,0.12); border: 1px solid rgba(46,125,196,0.28);
+      backdrop-filter: blur(20px);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 18px; animation: up 0.9s 0.2s both;
+    }
+    .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--blue); box-shadow:0 0 6px var(--blue); animation:pulseDot 2.2s ease-in-out infinite; }
+    @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 6px var(--blue)} 50%{opacity:0.4;transform:scale(1.8);box-shadow:0 0 12px var(--blue)} }
+    .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(4rem,18vw,7rem); line-height:0.88; letter-spacing:0.01em; animation:up 0.9s 0.4s both; }
+    .h-white  { display:block; color:#fff; }
+    .h-grad   { display:block; background:linear-gradient(110deg,var(--red),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-size:200% 100%; animation:textFlow 5s ease infinite; }
+    .h-stroke { display:block; color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,0.20); }
+    @keyframes textFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .hero-sub { margin-top:18px; max-width:360px; font-size:0.97rem; font-weight:400; line-height:1.75; color:var(--dim); animation:up 0.9s 0.6s both; }
+    .hero-btns { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; animation:up 0.9s 0.8s both; }
+    .btn-primary {
+      flex:1; min-width:140px; text-align:center; padding:16px 20px; border-radius:50px;
+      background:linear-gradient(135deg,var(--red-mid),var(--red)); color:#fff; font-weight:700; font-size:0.85rem;
+      letter-spacing:0.06em; text-transform:uppercase; text-decoration:none;
+      box-shadow:0 6px 24px var(--glow-red); transition:all 0.28s; position:relative; overflow:hidden;
+    }
+    .btn-primary::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent); animation:btnShine 3s ease-in-out infinite 1.5s; }
+    @keyframes btnShine { 0%{left:-100%} 50%{left:150%} 100%{left:150%} }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 36px var(--glow-red); }
+    .btn-secondary {
+      flex:1; min-width:120px; text-align:center; padding:15px 20px; border-radius:50px;
+      background:rgba(255,255,255,0.055); border:1px solid rgba(255,255,255,0.13);
+      backdrop-filter:blur(18px); color:var(--text); font-weight:600; font-size:0.85rem;
+      letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; transition:all 0.28s;
+    }
+    .btn-secondary:hover { background:rgba(255,255,255,0.10); transform:translateY(-3px); }
+    .hero-stats { display:flex; gap:10px; margin-top:30px; animation:up 0.9s 1.0s both; }
+    .stat-p {
+      flex:1; padding:14px 8px; border-radius:16px; text-align:center;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.075);
+      backdrop-filter:blur(28px) saturate(180%); box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .stat-p .n { font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; background:linear-gradient(135deg,var(--blue),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-size:200% 100%; animation:textFlow 6s ease infinite; }
+    .stat-p .l { font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+    @keyframes up { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
+
+    /* SECTION */
+    section { position:relative; z-index:1; padding:76px 22px; }
+    .s-eyebrow { display:flex; align-items:center; gap:8px; font-size:0.65rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); margin-bottom:12px; }
+    .s-eyebrow::before { content:''; flex-shrink:0; width:22px; height:2px; border-radius:2px; background:linear-gradient(90deg,var(--blue),var(--red)); }
+    .s-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,11vw,3.8rem); line-height:0.95; letter-spacing:0.01em; }
+    .t-red  { color:var(--red); }
+    .t-gold { color:var(--gold); }
+    .t-blue { color:var(--blue); }
+    .t-grad { background:linear-gradient(110deg,var(--blue),var(--red),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-size:300% 100%; animation:textFlow 7s ease infinite; }
+    .divider { width:44px; height:2.5px; border-radius:2px; margin:16px 0 26px; background:linear-gradient(90deg,var(--blue),var(--red),var(--gold),transparent); background-size:300% 100%; animation:dividerFlow 4s ease infinite; }
+    @keyframes dividerFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* ABOUT */
+    .about { background:var(--bg2); }
+    .about-wrap { margin-top:28px; }
+    .about-img-wrap {
+      border-radius:var(--r); overflow:hidden; position:relative; margin-bottom:28px;
+      box-shadow:0 0 0 1px rgba(46,125,196,0.14),0 32px 64px rgba(0,0,0,0.6),0 0 80px rgba(46,125,196,0.06);
+    }
+    .about-img-wrap img { width:100%; height:250px; object-fit:cover; display:block; filter:saturate(0.85) brightness(0.90); transition:transform 0.7s ease,filter 0.5s; }
+    .about-img-wrap:hover img { transform:scale(1.04); filter:saturate(1) brightness(0.95); }
+    .about-img-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(7,8,15,0.88) 0%,transparent 55%); }
+    .about-tag { position:absolute; bottom:18px; left:18px; z-index:2; padding:7px 16px; border-radius:50px; background:rgba(46,125,196,0.18); border:1px solid rgba(46,125,196,0.32); backdrop-filter:blur(20px); font-size:0.67rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue); }
+    .about-body { font-size:0.97rem; line-height:1.84; color:var(--dim); margin-bottom:22px; }
+    .quote-glass { padding:22px 20px; border-radius:var(--r-sm); background:rgba(46,125,196,0.08); border:1px solid rgba(46,125,196,0.18); border-left:3px solid var(--blue); backdrop-filter:blur(28px) saturate(180%); box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),0 12px 32px rgba(0,0,0,0.30); }
+    .quote-glass p { font-size:0.94rem; font-style:italic; line-height:1.80; color:rgba(232,235,244,0.92); }
+    .quote-glass .who { margin-top:12px; font-size:0.70rem; font-weight:700; letter-spacing:0.09em; color:var(--gold); }
+
+    /* SERVICES */
+    .services { background:var(--bg); }
+    .service-list { display:flex; flex-direction:column; gap:13px; margin-top:28px; }
+    .sc {
+      padding:20px 18px; border-radius:var(--r-sm); background:var(--g1); border:1px solid var(--g-border);
+      backdrop-filter:blur(28px) saturate(170%); -webkit-backdrop-filter:blur(28px) saturate(170%);
+      box-shadow:inset 0 1px 0 var(--g-shine),0 8px 28px rgba(0,0,0,0.28);
+      display:flex; align-items:flex-start; gap:15px; transition:all 0.30s; position:relative; overflow:hidden;
+    }
+    .sc::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.14) 40%,rgba(255,255,255,0.08) 60%,transparent 100%); }
+    .sc::after { content:''; position:absolute; left:0; top:12px; bottom:12px; width:0; border-radius:0 2px 2px 0; background:linear-gradient(to bottom,var(--blue),var(--red)); transition:width 0.3s ease; }
+    .sc:hover { background:rgba(46,125,196,0.08); border-color:rgba(46,125,196,0.28); transform:translateX(5px); box-shadow:inset 0 1px 0 var(--g-shine),0 16px 44px rgba(0,0,0,0.35),-5px 0 20px rgba(46,125,196,0.12); }
+    .sc:hover::after { width:3px; }
+    .sc-icon { width:48px; height:48px; border-radius:13px; flex-shrink:0; background:rgba(46,125,196,0.12); border:1px solid rgba(46,125,196,0.22); display:flex; align-items:center; justify-content:center; font-size:1.3rem; box-shadow:0 4px 16px rgba(46,125,196,0.15); }
+    .sc-body h3 { font-size:1rem; font-weight:700; color:#fff; margin-bottom:5px; line-height:1.2; }
+    .sc-body p  { font-size:0.81rem; line-height:1.62; color:var(--muted); }
+    .chip { display:inline-block; margin-top:9px; padding:3px 10px; border-radius:50px; background:rgba(245,184,48,0.10); border:1px solid rgba(245,184,48,0.22); font-size:0.62rem; font-weight:700; letter-spacing:0.11em; text-transform:uppercase; color:var(--gold); }
+
+    /* PARTNERS */
+    .partners { background:var(--bg2); }
+    .partner-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+    .pc {
+      padding:20px 16px; border-radius:var(--r-sm); background:rgba(255,255,255,0.032); border:1px solid rgba(255,255,255,0.065);
+      backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),0 6px 24px rgba(0,0,0,0.25);
+      transition:all 0.3s; position:relative; overflow:hidden;
+    }
+    .pc::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--blue),var(--red),var(--gold)); background-size:200% 100%; animation:dividerFlow 4s ease infinite; opacity:0; transition:opacity 0.3s; }
+    .pc:hover { background:rgba(46,125,196,0.08); border-color:rgba(46,125,196,0.22); transform:translateY(-4px); box-shadow:inset 0 1px 0 var(--g-shine),0 20px 44px rgba(0,0,0,0.35); }
+    .pc:hover::after { opacity:1; }
+    .pc-icon { width:42px; height:42px; border-radius:12px; background:rgba(46,125,196,0.12); border:1px solid rgba(46,125,196,0.2); display:flex; align-items:center; justify-content:center; font-size:1.15rem; margin-bottom:14px; box-shadow:0 4px 12px rgba(46,125,196,0.18); }
+    .pc h4 { font-size:0.84rem; font-weight:700; color:#fff; margin-bottom:6px; line-height:1.3; }
+    .pc p  { font-size:0.75rem; line-height:1.6; color:var(--muted); }
+
+    /* LOCATION / MAP */
+    .location { background:var(--bg3); padding:76px 22px; }
+    .map-card { margin-top:32px; border-radius:var(--r); overflow:hidden; border:1px solid rgba(46,125,196,0.20); box-shadow:0 0 0 1px rgba(255,255,255,0.06),0 32px 72px rgba(0,0,0,0.55),0 0 60px rgba(46,125,196,0.08); }
+    .map-iframe-wrap { position:relative; height:300px; }
+    .map-iframe-wrap::before { content:''; position:absolute; inset:0; z-index:5; pointer-events:none; background:linear-gradient(to bottom,var(--bg3) 0%,transparent 15%,transparent 80%,var(--bg3) 100%); }
+    .map-iframe-wrap iframe { width:100%; height:100%; border:none; display:block; filter:invert(95%) hue-rotate(185deg) saturate(0.8) brightness(0.88); }
+    .map-pin-wrap { position:absolute; z-index:10; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+    .map-pulse { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; border:2px solid rgba(222,58,58,0.7); animation:radarPulse 2.2s ease-out infinite; }
+    .map-pulse-2 { animation-delay:0.7s; opacity:0.6; }
+    .map-pulse-3 { animation-delay:1.4s; opacity:0.35; }
+    @keyframes radarPulse { 0%{transform:translate(-50%,-50%) scale(0.5);opacity:0.9} 100%{transform:translate(-50%,-50%) scale(3.5);opacity:0} }
+    .map-dot { width:14px; height:14px; border-radius:50%; background:var(--red); border:3px solid #fff; box-shadow:0 0 0 3px rgba(222,58,58,0.4),0 4px 12px rgba(222,58,58,0.6); position:relative; z-index:2; }
+    .map-label { position:absolute; top:-42px; left:50%; transform:translateX(-50%); padding:6px 14px; border-radius:50px; background:rgba(7,8,15,0.82); border:1px solid rgba(46,125,196,0.35); backdrop-filter:blur(24px); font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); white-space:nowrap; box-shadow:0 4px 16px rgba(0,0,0,0.5); }
+    .map-label::after { content:''; position:absolute; bottom:-5px; left:50%; transform:translateX(-50%) rotate(45deg); width:7px; height:7px; background:rgba(7,8,15,0.82); border-right:1px solid rgba(46,125,196,0.35); border-bottom:1px solid rgba(46,125,196,0.35); }
+    .map-overlay-bar { padding:16px 20px; background:rgba(7,8,15,0.80); backdrop-filter:blur(28px) saturate(180%); border-top:1px solid rgba(255,255,255,0.065); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .map-overlay-left { display:flex; align-items:center; gap:12px; }
+    .map-city-icon { width:36px; height:36px; border-radius:10px; flex-shrink:0; background:rgba(46,125,196,0.15); border:1px solid rgba(46,125,196,0.28); display:flex; align-items:center; justify-content:center; font-size:1rem; }
+    .map-city-name { font-size:0.92rem; font-weight:700; color:#fff; line-height:1.2; }
+    .map-city-sub  { font-size:0.68rem; color:var(--muted); margin-top:1px; }
+    .map-cta { padding:8px 16px; border-radius:50px; flex-shrink:0; background:rgba(46,125,196,0.15); border:1px solid rgba(46,125,196,0.32); backdrop-filter:blur(10px); color:var(--blue); font-size:0.72rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; transition:all 0.25s; white-space:nowrap; }
+    .map-cta:hover { background:var(--blue); color:#fff; }
+
+    /* CONTACT */
+    .contact { background:var(--bg); }
+    .contact-info { display:flex; flex-direction:column; gap:11px; margin-top:28px; margin-bottom:28px; }
+    .ci { display:flex; align-items:center; gap:15px; padding:17px 18px; border-radius:var(--r-sm); background:var(--g1); border:1px solid var(--g-border); backdrop-filter:blur(28px) saturate(170%); -webkit-backdrop-filter:blur(28px) saturate(170%); box-shadow:inset 0 1px 0 var(--g-shine),0 6px 20px rgba(0,0,0,0.22); transition:all 0.28s; }
+    .ci:hover { border-color:rgba(46,125,196,0.28); background:rgba(46,125,196,0.07); transform:translateX(3px); }
+    .ci-icon { width:42px; height:42px; border-radius:12px; flex-shrink:0; background:rgba(46,125,196,0.12); border:1px solid rgba(46,125,196,0.22); display:flex; align-items:center; justify-content:center; font-size:1.1rem; box-shadow:0 4px 12px rgba(46,125,196,0.14); }
+    .ci-txt h5 { font-size:0.62rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+    .ci-txt a, .ci-txt p { font-size:0.90rem; font-weight:600; color:#fff; text-decoration:none; line-height:1.3; }
+    .ci-txt a:hover { color:var(--gold); }
+
+    /* FORM */
+    .form-glass {
+      padding:26px 22px; border-radius:var(--r);
+      background:rgba(255,255,255,0.044); border:1px solid rgba(255,255,255,0.088);
+      backdrop-filter:blur(44px) saturate(220%); -webkit-backdrop-filter:blur(44px) saturate(220%);
+      box-shadow:0 40px 80px rgba(0,0,0,0.50),inset 0 1px 0 rgba(255,255,255,0.10),inset 0 -1px 0 rgba(0,0,0,0.15),0 0 0 1px rgba(255,255,255,0.04);
+      position:relative; overflow:hidden;
+    }
+    .form-glass::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent 0%,rgba(46,125,196,0.5) 20%,rgba(222,58,58,0.4) 50%,rgba(245,184,48,0.5) 80%,transparent 100%); background-size:200% 100%; animation:prismShimmer 5s ease infinite; }
+    @keyframes prismShimmer { 0%{background-position:0% 50%;opacity:0.8} 50%{background-position:100% 50%;opacity:1} 100%{background-position:0% 50%;opacity:0.8} }
+    .form-glass h3 { font-family:'Bebas Neue',sans-serif; font-size:1.85rem; letter-spacing:0.04em; margin-bottom:4px; }
+    .form-glass h3 span { background:linear-gradient(110deg,var(--blue),var(--red)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .form-sub { font-size:0.80rem; color:var(--muted); margin-bottom:22px; }
+    .fg { display:flex; flex-direction:column; gap:7px; margin-bottom:13px; }
+    .fg label { font-size:0.63rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+    .fg input, .fg select, .fg textarea { padding:13px 15px; border-radius:12px; background:rgba(255,255,255,0.055); border:1px solid rgba(255,255,255,0.09); color:#fff; font-family:'Inter',sans-serif; font-size:0.88rem; outline:none; transition:all 0.25s; backdrop-filter:blur(10px); -webkit-appearance:none; box-shadow:inset 0 1px 0 rgba(255,255,255,0.05); }
+    .fg input::placeholder, .fg textarea::placeholder { color:rgba(90,100,128,0.7); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:rgba(46,125,196,0.55); background:rgba(46,125,196,0.08); box-shadow:0 0 0 3px rgba(46,125,196,0.14),inset 0 1px 0 rgba(255,255,255,0.06); }
+    .fg select option { background:var(--bg2); color:#fff; }
+    .fg textarea { resize:none; min-height:86px; }
+    .frow { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-btn { width:100%; padding:15px; border-radius:50px; margin-top:6px; background:rgba(46,125,196,0.14); border:1px solid rgba(46,125,196,0.42); backdrop-filter:blur(14px); color:var(--blue); font-family:'Inter',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; transition:all 0.28s; position:relative; overflow:hidden; }
+    .form-btn::after { content:''; position:absolute; inset:0; border-radius:50px; background:linear-gradient(135deg,var(--blue-mid),var(--blue)); opacity:0; transition:opacity 0.28s; }
+    .form-btn:hover { color:#fff; box-shadow:0 8px 28px var(--glow-blue); transform:translateY(-2px); }
+    .form-btn:hover::after { opacity:1; }
+    .form-btn span { position:relative; z-index:1; }
+    .form-success { display:none; margin-top:14px; padding:15px; border-radius:12px; background:rgba(46,125,196,0.10); border:1px solid rgba(46,125,196,0.25); text-align:center; font-size:0.87rem; color:var(--gold); }
+
+    /* STICKY */
+    .sticky-bar { position:fixed; bottom:0; left:0; right:0; z-index:200; padding:13px 22px; padding-bottom:calc(13px + env(safe-area-inset-bottom)); background:rgba(7,8,15,0.72); backdrop-filter:blur(32px) saturate(200%); -webkit-backdrop-filter:blur(32px) saturate(200%); border-top:1px solid rgba(255,255,255,0.065); box-shadow:0 -8px 32px rgba(0,0,0,0.4); display:none; transition:opacity 0.35s; }
+    .sticky-bar a { display:block; width:100%; padding:15px; border-radius:50px; text-align:center; background:linear-gradient(135deg,var(--red-mid),var(--red)); color:#fff; font-weight:700; font-size:0.88rem; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; box-shadow:0 6px 24px var(--glow-red); }
+
+    /* FOOTER */
+    footer { position:relative; z-index:1; background:var(--bg2); border-top:1px solid rgba(255,255,255,0.055); padding:48px 22px 88px; padding-bottom:calc(88px + env(safe-area-inset-bottom)); }
+    .foot-brand { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .foot-brand img { height:42px; filter:drop-shadow(0 0 12px rgba(245,184,48,0.50)); animation:logoGlow 4s ease-in-out infinite alternate; }
+    .foot-brand-name { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:0.09em; background:linear-gradient(110deg,var(--blue),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-size:200% 100%; animation:brandShimmer 5s ease infinite; }
+    .foot-tagline { font-size:0.80rem; color:var(--muted); line-height:1.68; max-width:300px; margin-bottom:28px; }
+    .foot-cols { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-bottom:30px; }
+    .fc h6 { font-size:0.62rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+    .fc ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .fc li { font-size:0.80rem; color:var(--muted); }
+    .fc li a { color:var(--muted); text-decoration:none; transition:color 0.2s; }
+    .fc li a:hover { color:#fff; }
+    .foot-bottom { border-top:1px solid rgba(255,255,255,0.05); padding-top:20px; font-size:0.72rem; color:var(--muted); line-height:1.7; }
+    .foot-bottom .ac { color:var(--gold); }
+
+    /* REVEAL */
+    .rv  { opacity:0; transform:translateY(30px);  transition:opacity 0.68s ease,transform 0.68s ease; }
+    .rv.in  { opacity:1; transform:translateY(0); }
+    .rv-x { opacity:0; transform:translateX(-22px); transition:opacity 0.68s ease,transform 0.68s ease; }
+    .rv-x.in { opacity:1; transform:translateX(0); }
+
+    /* DESKTOP */
+    @media (min-width: 768px) {
+      nav { padding:0 6vw; }
+      section { padding:90px 6vw; }
+      .location { padding:90px 6vw; }
+      .hero { padding:0 6vw 80px; justify-content:center; }
+      .hero-content { max-width:580px; }
+      .hero-stats { max-width:420px; }
+      .about-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:center; }
+      .about-img-wrap { margin-bottom:0; }
+      .about-img-wrap img { height:400px; }
+      .service-list { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+      .sc { flex-direction:column; }
+      .sc:hover { transform:translateY(-5px) translateX(0); }
+      .partner-grid { grid-template-columns:repeat(4,1fr); }
+      .contact-wrap { display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start; }
+      .contact-info { margin-bottom:0; }
+      .map-iframe-wrap { height:360px; }
+      footer { padding:60px 6vw 40px; }
+      .sticky-bar { display:none !important; }
+      .frow { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 767px) {
+      .sticky-bar { display:block; }
+      .frow { grid-template-columns:1fr; }
+      .hero h1 { font-size:clamp(3.8rem,16vw,5.5rem); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grad-bg"></div>
+<div class="ambient">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img src="FINAL_PM__Edited_.png" alt="Jon the Dispatcher"/>
+    <span class="nav-brand">Jon the Dispatcher</span>
+  </div>
+  <a href="#contact" class="nav-cta"><span>Partner Up →</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-sweep"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>Dallas, TX · Open Deck Only</div>
+    <h1>
+      <span class="h-white">Heavy</span>
+      <span class="h-grad">Haul.</span>
+      <span class="h-stroke">Done Right.</span>
+    </h1>
+    <p class="hero-sub">Jonathan Touqeer — your dedicated open deck dispatcher. Smart loads, strong rates, and zero headache on every single mile.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Partner With Me</a>
+      <a href="#services" class="btn-secondary">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-p"><div class="n">100%</div><div class="l">Open Deck</div></div>
+      <div class="stat-p"><div class="n">48</div><div class="l">States</div></div>
+      <div class="stat-p"><div class="n">24/7</div><div class="l">On Call</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="rv-x">
+    <div class="s-eyebrow">Who's Behind the Board</div>
+    <h2 class="s-title">Meet <span class="t-gold">Jonathan</span><br/>Touqeer</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-img-wrap rv">
+      <img src="Gemini_Generated_Image_lhpxdelhpxdelhpx.png" alt="Heavy Haul Truck"/>
+      <span class="about-tag">📍 Dallas, TX Based</span>
+    </div>
+    <div class="rv-x">
+      <p class="about-body">Jonathan isn't just a dispatcher — he's your strategic partner on every load. Exclusively focused on open deck freight, he brings the kind of specialized expertise that generalist dispatchers simply can't match. No wasted miles, no lowball rates. Just smart loads that keep your wheels turning and your revenue strong.</p>
+      <div class="quote-glass">
+        <p>"My job is to keep your truck loaded, your rate per mile high, and the freight headaches completely off your plate."</p>
+        <div class="who">— Jonathan Touqeer · Founder, Jon the Dispatcher</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="rv">
+    <div class="s-eyebrow">What We Move</div>
+    <h2 class="s-title">Open Deck <span class="t-red">Specialties</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="service-list rv">
+    <div class="sc"><div class="sc-icon">🚛</div><div class="sc-body"><h3>Flatbed</h3><p>Steel, lumber, machinery — we maximize every mile on 48ft and 53ft flats with top-tier rate negotiation.</p><span class="chip">48ft · 53ft</span></div></div>
+    <div class="sc"><div class="sc-icon">📦</div><div class="sc-body"><h3>Step Deck</h3><p>Overheight freight a standard flatbed can't legally touch. Placed precisely, every time.</p><span class="chip">Overheight Loads</span></div></div>
+    <div class="sc"><div class="sc-icon">⚙️</div><div class="sc-body"><h3>Lowboy</h3><p>Heavy construction iron, mining machinery, industrial equipment. We know the weight laws cold, by state.</p><span class="chip">Heavy Equipment</span></div></div>
+    <div class="sc"><div class="sc-icon">🏗️</div><div class="sc-body"><h3>RGN / Removable Gooseneck</h3><p>The heaviest, tallest loads on the continent. Permits handled. Escorts arranged. Drama-free.</p><span class="chip">Super Heavy</span></div></div>
+    <div class="sc"><div class="sc-icon">⚡</div><div class="sc-body"><h3>Hotshot</h3><p>Speed is the product. Dually and gooseneck loaded fast, revenue per mile kept strong.</p><span class="chip">Expedited</span></div></div>
+    <div class="sc"><div class="sc-icon">🌧️</div><div class="sc-body"><h3>Conestoga</h3><p>Rolling tarp protection for sensitive flatbed cargo. Loads others miss — we find, book, and deliver.</p><span class="chip">Weather-Protected</span></div></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners" id="partners">
+  <div class="rv" style="text-align:center">
+    <div class="s-eyebrow" style="justify-content:center">Your Advantage</div>
+    <h2 class="s-title"><span class="t-grad">My Clients Are<br/>My Partners</span></h2>
+    <div class="divider" style="margin-left:auto;margin-right:auto"></div>
+  </div>
+  <div class="partner-grid rv">
+    <div class="pc"><div class="pc-icon">💰</div><h4>Rate Negotiation</h4><p>We fight for every dollar. No deadhead traps. No lowball loads — ever.</p></div>
+    <div class="pc"><div class="pc-icon">🎯</div><h4>Open Deck Only</h4><p>100% specialized. We know the lanes, brokers, and seasonal patterns cold.</p></div>
+    <div class="pc"><div class="pc-icon">📞</div><h4>Always Reachable</h4><p>24/7 real communication. Never waiting on a callback or an answer.</p></div>
+    <div class="pc"><div class="pc-icon">🗺️</div><h4>Smart Lane Planning</h4><p>We plan three loads ahead. Backhauls always built in, deadhead minimized.</p></div>
+    <div class="pc"><div class="pc-icon">📋</div><h4>Full Load Management</h4><p>Paperwork, check calls, broker comms — all handled so your eyes stay on the road.</p></div>
+    <div class="pc"><div class="pc-icon">⚖️</div><h4>Permit & Compliance</h4><p>Oversize, overweight, wide load — permits and routes coordinated by state.</p></div>
+    <div class="pc"><div class="pc-icon">🤝</div><h4>Partner-First Always</h4><p>Transparent fees, honest talk, zero games. Your truck. Your rules.</p></div>
+    <div class="pc"><div class="pc-icon">📈</div><h4>Revenue Insights</h4><p>Track loaded miles, rate trends, and earnings to grow your operation intelligently.</p></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <div class="rv">
+    <div class="s-eyebrow">Home Base</div>
+    <h2 class="s-title">Dallas, <span class="t-blue">Texas</span></h2>
+    <div class="divider"></div>
+    <p style="font-size:0.94rem;line-height:1.78;color:var(--dim);max-width:400px;margin-bottom:0">
+      Dispatching nationwide from the heart of Texas. I-10, I-20, I-40 — or anywhere across the 48 states. Jon is always on the board and working for you.
+    </p>
+  </div>
+  <div class="map-card rv">
+    <div class="map-iframe-wrap">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-97.1,32.55,-96.55,32.98&layer=mapnik&marker=32.7767,-96.7970"
+        title="Dallas, Texas"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+      <div class="map-pin-wrap">
+        <div class="map-label">📍 Jon the Dispatcher</div>
+        <div class="map-pulse"></div>
+        <div class="map-pulse map-pulse-2"></div>
+        <div class="map-pulse map-pulse-3"></div>
+        <div class="map-dot"></div>
+      </div>
+    </div>
+    <div class="map-overlay-bar">
+      <div class="map-overlay-left">
+        <div class="map-city-icon">🏙️</div>
+        <div>
+          <div class="map-city-name">Dallas, Texas</div>
+          <div class="map-city-sub">Dispatching all 48 contiguous states</div>
+        </div>
+      </div>
+      <a href="#contact" class="map-cta">Partner Up →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="rv">
+    <div class="s-eyebrow">Let's Move Freight</div>
+    <h2 class="s-title">Ready to <span class="t-red">Partner?</span></h2>
+    <div class="divider"></div>
+    <p style="font-size:0.95rem;line-height:1.78;color:var(--dim)">Owner-operator or established carrier — drop your info and Jonathan will reach out personally within 24 hours. Let's talk rates, lanes, and what your truck needs to win.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info rv-x">
+      <div class="ci"><div class="ci-icon">📧</div><div class="ci-txt"><h5>Email</h5><a href="mailto:info@jonthedispatcher.com">info@jonthedispatcher.com</a></div></div>
+      <div class="ci"><div class="ci-icon">📍</div><div class="ci-txt"><h5>Based In</h5><p>Dallas, Texas — Dispatching Nationwide</p></div></div>
+      <div class="ci"><div class="ci-icon">🕐</div><div class="ci-txt"><h5>Availability</h5><p>24 / 7 — Always on the board</p></div></div>
+      <div class="ci"><div class="ci-icon">🚛</div><div class="ci-txt"><h5>Specialization</h5><p>Flatbed · Step Deck · Lowboy · RGN · Hotshot · Conestoga</p></div></div>
+    </div>
+    <div class="form-glass rv">
+      <h3>Carrier <span>Inquiry</span></h3>
+      <p class="form-sub">Jonathan responds personally — within 24 hours.</p>
+      <form id="cForm" onsubmit="handleForm(event)">
+        <div class="frow">
+          <div class="fg"><label>Full Name *</label><input type="text" placeholder="Your full name" required autocomplete="name"/></div>
+          <div class="fg"><label>Phone *</label><input type="tel" placeholder="+1 (000) 000-0000" required autocomplete="tel"/></div>
+        </div>
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@email.com" required autocomplete="email"/></div>
+        <div class="frow">
+          <div class="fg">
+            <label>Trailer Type *</label>
+            <select required>
+              <option value="" disabled selected>Select type</option>
+              <option>Flatbed (48ft)</option>
+              <option>Flatbed (53ft)</option>
+              <option>Step Deck</option>
+              <option>Lowboy</option>
+              <option>RGN / Removable Gooseneck</option>
+              <option>Hotshot</option>
+              <option>Conestoga</option>
+            </select>
+          </div>
+          <div class="fg"><label>Home State</label><input type="text" placeholder="e.g. Texas"/></div>
+        </div>
+        <div class="fg"><label>Notes / Preferred Lanes</label><textarea placeholder="Tell us about your lanes, equipment, or any questions..."></textarea></div>
+        <button type="submit" class="form-btn"><span>Send My Info →</span></button>
+        <div class="form-success" id="formOk">✅ Received! Jonathan will be in touch shortly. Let's haul together.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <img src="FINAL_PM__Edited_.png" alt="Jon the Dispatcher"/>
+    <span class="foot-brand-name">Jon the Dispatcher</span>
+  </div>
+  <p class="foot-tagline">Dedicated open deck dispatching out of Dallas, Texas. Moving the heavy iron that keeps America building.</p>
+  <div class="foot-cols">
+    <div class="fc">
+      <h6>Services</h6>
+      <ul><li>Flatbed</li><li>Step Deck</li><li>Lowboy &amp; RGN</li><li>Hotshot</li><li>Conestoga</li></ul>
+    </div>
+    <div class="fc">
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="mailto:info@jonthedispatcher.com">info@jonthedispatcher.com</a></li>
+        <li>Dallas, Texas</li>
+        <li>Available 24 / 7</li>
+        <li><a href="#contact">Partner With Us →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    © 2025 <span class="ac">Jon the Dispatcher</span> · Jonathan Touqeer · Dallas, TX<br/>
+    Open Deck · Heavy Haul Specialists
+  </div>
+</footer>
+
+<div class="sticky-bar" id="stickyBar">
+  <a href="#contact">📧 Partner With Jon Today</a>
+</div>
+
+<script>
+  const revEls = document.querySelectorAll('.rv, .rv-x');
+  const revObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 65);
+        revObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  revEls.forEach(el => revObs.observe(el));
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const bg = document.querySelector('.hero-bg');
+        if (bg) bg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.20}px)`;
+        const contact = document.getElementById('contact');
+        const bar = document.getElementById('stickyBar');
+        if (contact && bar) {
+          const top = contact.getBoundingClientRect().top;
+          bar.style.opacity = top < window.innerHeight * 0.75 ? '0' : '1';
+          bar.style.pointerEvents = top < window.innerHeight * 0.75 ? 'none' : 'auto';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-btn');
+    btn.querySelector('span').textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('formOk').style.display = 'block';
+      btn.style.display = 'none';
+      e.target.querySelectorAll('input,select,textarea').forEach(el => { el.value=''; el.disabled=true; });
+    }, 1000);
+  }
+</script>
+</body>
+</html>
