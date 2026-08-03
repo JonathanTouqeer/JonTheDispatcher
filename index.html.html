@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#070A12" />
+<meta name="description" content="Jon the Dispatcher — dedicated open deck & heavy-haul dispatch out of Dallas, TX. Flatbed, step deck, lowboy, RGN, hotshot & conestoga. 3 carriers max, $0 permit fees, 24/7 on the board." />
+<title>Jon the Dispatcher — Open Deck & Heavy Haul Dispatch · Dallas TX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230FE3A3'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%2304130C'%3EJT%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link href="https://cdn.jsdelivr.net/fontsource/css/space-grotesk:wght@500;600;700.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/fontsource/css/plus-jakarta-sans:wght@400;500;600;700;800.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/fontsource/css/jetbrains-mono:wght@400;500;600;700.css" rel="stylesheet" />
+<style>
+/* ============================================================
+   TOKENS + RESET
+   ============================================================ */
+:root{
+  --bg0:#070A12; --bg1:#0C111E; --panel:#0A0F1B;
+  --ink:#F8FAFC; --mut:#94A3B8; --dim:#64748B;
+  --em:#0FE3A3; --em2:#5CF2C6; --em-deep:#06B581;
+  --ice:#45C4FF; --ice2:#7DD8FF; --amber:#FBBF24; --rose:#FB7185;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.16);
+  --glow-em:rgba(15,227,163,.55); --glow-ice:rgba(69,196,255,.45);
+  --glass-1:linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.018) 40%, rgba(255,255,255,0) 62%);
+  --glass-2:linear-gradient(180deg, rgba(14,20,34,.66), rgba(8,11,20,.82));
+  --shadow:0 26px 64px -28px rgba(0,0,0,.78);
+  --r:18px; --r-sm:12px;
+  --nav-h:74px;
+  --display:'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sans:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans); color:var(--ink); background:var(--bg0);
+  line-height:1.6; font-size:16px; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+::selection{background:rgba(92,242,198,.34);color:#04130C}
+:focus-visible{outline:2px solid var(--em2);outline-offset:3px;border-radius:6px}
+
+/* ============================================================
+   AMBIENT BACKGROUND (pure gradients — no blur cost)
+   ============================================================ */
+.ambient{position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(56% 46% at 8% -8%, rgba(15,227,163,.20), transparent 60%),
+    radial-gradient(46% 40% at 98% 6%, rgba(69,196,255,.16), transparent 60%),
+    radial-gradient(72% 56% at 50% 114%, rgba(15,227,163,.10), transparent 62%),
+    linear-gradient(180deg, var(--bg0), var(--bg1) 60%, var(--bg0));}
+.grid-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-image:radial-gradient(rgba(148,163,184,.10) 1px, transparent 1.4px);
+  background-size:28px 28px;
+  -webkit-mask-image:radial-gradient(80% 64% at 50% 0%, #000 28%, transparent 82%);
+  mask-image:radial-gradient(80% 64% at 50% 0%, #000 28%, transparent 82%);}
+.orb{position:fixed;border-radius:50%;z-index:-2;pointer-events:none;transform:translate3d(0,0,0)}
+.orb.a{width:48vw;height:48vw;left:-12vw;top:4vh;
+  background:radial-gradient(circle at center, rgba(15,227,163,.20), transparent 66%);
+  animation:drift1 26s ease-in-out infinite alternate}
+.orb.b{width:42vw;height:42vw;right:-10vw;top:40vh;
+  background:radial-gradient(circle at center, rgba(69,196,255,.15), transparent 66%);
+  animation:drift2 32s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate3d(6vw,5vh,0)}}
+@keyframes drift2{to{transform:translate3d(-5vw,-6vh,0)}}
+
+/* ============================================================
+   LAYOUT UTILS
+   ============================================================ */
+.wrap{width:min(1180px, 100% - 36px);margin-inline:auto}
+section{position:relative;scroll-margin-top:96px}
+.pad{padding-block:74px}
+@media(min-width:1024px){.pad{padding-block:118px}}
+
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--em2);font-weight:500}
+.tag::before{content:"";width:7px;height:7px;border-radius:2px;
+  background:linear-gradient(135deg,var(--em2),var(--ice));
+  box-shadow:0 0 10px var(--glow-em)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.03em;line-height:1.04;color:var(--ink)}
+h2{font-size:clamp(1.95rem,6vw,3.2rem)}
+h3{font-size:1.22rem;letter-spacing:-.01em;line-height:1.25}
+.lead{color:var(--mut);font-size:clamp(1rem,2.6vw,1.16rem);max-width:46ch}
+.mono{font-family:var(--mono)}
+.accent{color:var(--em2);text-shadow:0 0 22px rgba(92,242,198,.35)}
+
+.glass{
+  background:var(--glass-1), var(--glass-2);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 28px rgba(92,242,198,.035), var(--shadow);
+}
+
+/* reveal */
+.rv{opacity:0;transform:translate3d(0,26px,0);
+  transition:opacity .7s ease, transform .8s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;
+  letter-spacing:.005em;cursor:pointer;white-space:nowrap;
+  transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s, background .25s, border-color .25s;
+  transform:translate3d(0,0,0)}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:linear-gradient(180deg,#5CF2C6,#0FE3A3);color:#04130C;
+  box-shadow:0 12px 36px -10px rgba(15,227,163,.62), 0 0 0 1px rgba(255,255,255,.18) inset, inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-primary:hover{transform:translate3d(0,-2px,0);box-shadow:0 18px 50px -10px rgba(92,242,198,.7), 0 0 0 1px rgba(255,255,255,.22) inset}
+.btn-primary:active{transform:translate3d(0,0,0)}
+.btn-ghost{border:1px solid var(--line2);color:var(--ink);background:rgba(255,255,255,.025)}
+.btn-ghost:hover{border-color:rgba(69,196,255,.55);background:rgba(69,196,255,.07);transform:translate3d(0,-2px,0);box-shadow:0 0 26px -8px var(--glow-ice)}
+.btn-sm{min-height:42px;padding:0 18px;font-size:13.5px}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;top:10px;left:0;right:0;z-index:100}
+.nav .wrap{padding:0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  height:62px;padding:0 10px 0 14px;border-radius:16px;
+  border:1px solid var(--line);
+  background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.014) 42%), linear-gradient(180deg, rgba(13,18,30,.74), rgba(8,11,19,.84));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 12px 40px -22px rgba(0,0,0,.85);
+  transition:background .3s, box-shadow .3s, border-color .3s}
+.nav.scrolled .nav-inner{
+  background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.018) 42%), linear-gradient(180deg, rgba(10,14,24,.95), rgba(7,10,18,.97));
+  border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.09), 0 18px 50px -22px rgba(0,0,0,.92)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:13px;color:#04130C;
+  background:linear-gradient(150deg,#5CF2C6,#0FE3A3);
+  box-shadow:0 0 0 1px rgba(255,255,255,.22) inset, 0 0 18px -2px var(--glow-em), 0 6px 18px -6px rgba(15,227,163,.6)}
+.brand-text{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.16em;white-space:nowrap;line-height:1.2}
+.brand-text em{font-style:normal;color:var(--em2);font-size:9px;vertical-align:1px;margin:0 2px}
+.brand-text span{display:block;color:var(--dim);font-size:8px;letter-spacing:.22em;font-family:var(--mono);font-weight:500}
+.nav-links{display:none;align-items:center;gap:2px}
+.nav-links a{font-size:13.5px;font-weight:600;color:var(--mut);padding:10px 13px;border-radius:9px;
+  transition:color .2s, background .2s}
+.nav-links a:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-burger{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;
+  border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.nav-burger i{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:transform .3s, opacity .3s}
+.nav-burger i::before,.nav-burger i::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s, top .3s}
+.nav-burger i::before{top:-6px}.nav-burger i::after{top:6px}
+.nav-burger.open i{background:transparent}
+.nav-burger.open i::before{top:0;transform:rotate(45deg)}
+.nav-burger.open i::after{top:0;transform:rotate(-45deg)}
+.nav-cta{display:none}
+@media(min-width:760px){.nav-cta{display:inline-flex}}
+@media(min-width:1024px){.nav-links{display:flex}.nav-burger{display:none}}
+
+/* mobile menu */
+.mmenu{position:absolute;top:calc(100% + 8px);left:0;right:0;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg, rgba(12,17,28,.97), rgba(8,11,19,.98));
+  box-shadow:var(--shadow);
+  max-height:0;opacity:0;transform:translate3d(0,-8px,0);
+  transition:max-height .4s ease, opacity .3s, transform .35s}
+.mmenu.open{max-height:480px;opacity:1;transform:none}
+.mmenu a{display:flex;align-items:center;gap:14px;min-height:54px;padding:0 20px;
+  font-weight:600;color:var(--mut);border-bottom:1px solid rgba(255,255,255,.05);
+  transition:color .2s, background .2s}
+.mmenu a:not(.btn)::before{content:attr(data-i);font-family:var(--mono);font-size:11px;color:var(--em2)}
+.mmenu a:not(.btn):hover{color:var(--ink);background:rgba(255,255,255,.03)}
+.mmenu .btn{margin:14px 16px;width:calc(100% - 32px)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-top:calc(var(--nav-h) + 38px)}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--dim);
+  text-transform:uppercase;margin-bottom:18px}
+.hero-grid{display:grid;gap:42px}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;gap:54px}}
+.status{display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border-radius:999px;
+  border:1px solid rgba(92,242,198,.32);background:rgba(15,227,163,.10);
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#BBF7E0;margin-bottom:22px;
+  box-shadow:0 0 22px -6px var(--glow-em)}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--em2);
+  box-shadow:0 0 0 0 rgba(92,242,198,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(92,242,198,0)}100%{box-shadow:0 0 0 0 rgba(92,242,198,0)}}
+.hero h1{font-size:clamp(2.7rem,10.5vw,5.3rem);letter-spacing:-.045em;line-height:1.0;margin-bottom:18px}
+.hero h1 .line2{color:var(--em2);text-shadow:0 0 46px rgba(92,242,198,.5)}
+.hero-sub{font-family:var(--display);font-size:clamp(1.15rem,4vw,1.55rem);font-weight:600;color:var(--ink);
+  letter-spacing:-.01em;margin-bottom:16px}
+.hero-sub .pipe{color:var(--dim);margin:0 8px}
+.hero-intro{color:var(--mut);font-size:clamp(1rem,2.6vw,1.12rem);max-width:52ch;margin-bottom:28px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+.pills{display:flex;flex-wrap:wrap;gap:9px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.03);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mut)}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--em2);box-shadow:0 0 8px var(--glow-em)}
+.pill.ice i{background:var(--ice);box-shadow:0 0 8px var(--glow-ice)}
+.pill b{color:var(--ink);font-weight:600}
+
+/* dispatch console */
+.console{position:relative;padding:0;overflow:hidden}
+.console::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(118deg, transparent 32%, rgba(255,255,255,.05) 48%, transparent 62%)}
+.console-top{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.14)}
+.dots i:nth-child(1){background:#5b6472}.dots i:nth-child(2){background:#3d4654}.dots i:nth-child(3){background:#2c3340}
+.console-title{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.04em}
+.live-chip{margin-left:auto;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--em2);
+  padding:5px 10px;border-radius:7px;border:1px solid rgba(92,242,198,.34);background:rgba(15,227,163,.12);
+  box-shadow:0 0 16px -6px var(--glow-em)}
+.lanes{padding:8px 12px;display:flex;flex-direction:column;gap:6px}
+.lane{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;
+  padding:11px 12px;border-radius:11px;border:1px solid transparent;
+  background:rgba(255,255,255,.02);transition:background .5s, border-color .5s}
+.lane.flash{background:rgba(15,227,163,.10);border-color:rgba(92,242,198,.26)}
+.lane-route{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:600}
+.lane-route span{color:var(--dim);margin:0 6px}
+.lane-rate{font-family:var(--mono);font-size:14px;color:var(--em2);font-weight:700;text-align:right;text-shadow:0 0 14px rgba(92,242,198,.3)}
+.lane-rate small{color:var(--dim);font-weight:500;font-size:10px}
+.lane-side{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:4px 8px;border-radius:6px;font-weight:600}
+.chip.live{color:var(--em2);background:rgba(15,227,163,.14);border:1px solid rgba(92,242,198,.36)}
+.chip.booked{color:var(--ice);background:rgba(69,196,255,.14);border:1px solid rgba(69,196,255,.34)}
+.chip.hot{color:var(--amber);background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.34)}
+.lane-type{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dim)}
+.console-checks{display:flex;flex-wrap:wrap;gap:6px 14px;padding:12px 16px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mut)}
+.console-checks b{color:var(--em2);font-weight:600;margin-left:3px}
+.console-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 16px;border-top:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(15,227,163,.06), transparent)}
+.avg{display:flex;flex-direction:column;gap:1px}
+.avg b{font-family:var(--mono);font-size:24px;color:var(--em2);line-height:1;text-shadow:0 0 18px rgba(92,242,198,.35)}
+.avg span{font-size:10.5px;color:var(--dim);letter-spacing:.04em}
+.ahead{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.ahead-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut)}
+.mini-route{display:flex;align-items:center;gap:0;width:120px;position:relative}
+.mini-route::before{content:"";position:absolute;left:5px;right:5px;height:2px;background:rgba(255,255,255,.12);top:50%}
+.mini-route i{position:relative;width:9px;height:9px;border-radius:50%;background:var(--em2);
+  box-shadow:0 0 8px var(--glow-em);margin-right:auto}
+.mini-route i:last-child{margin-right:0}
+.mini-route i:nth-child(2){background:var(--em)}
+.mini-route i:nth-child(3){background:rgba(255,255,255,.25);box-shadow:none}
+.mini-route i.home{border-radius:2px;background:var(--ice);box-shadow:0 0 8px var(--glow-ice)}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{overflow:hidden;position:relative;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.025), transparent)}
+.ticker::before,.ticker::after{content:"";position:absolute;left:0;right:0;height:1px;z-index:1;
+  background:linear-gradient(90deg, transparent, rgba(92,242,198,.45), rgba(69,196,255,.35), transparent)}
+.ticker::before{top:0}.ticker::after{bottom:0}
+.ticker-track{display:flex;width:max-content;animation:tick 34s linear infinite;transform:translate3d(0,0,0)}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.tset{display:flex;align-items:center;flex-shrink:0}
+.tset span{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--mut);
+  padding:15px 0;white-space:nowrap}
+.tset i{color:var(--em);font-size:8px;margin:0 26px;opacity:.8;text-shadow:0 0 8px var(--glow-em)}
+@keyframes tick{to{transform:translate3d(-50%,0,0)}}
+
+/* ============================================================
+   STATS BAND
+   ============================================================ */
+.stats{position:relative;background:rgba(255,255,255,.014)}
+.stats::before,.stats::after{content:"";position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(92,242,198,.5), rgba(69,196,255,.4), transparent)}
+.stats::before{top:0}.stats::after{bottom:0}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line)}
+.stat{background:var(--bg0);padding:28px 22px;display:flex;flex-direction:column;gap:7px}
+.stat b{font-family:var(--mono);font-size:clamp(2.1rem,8vw,2.9rem);font-weight:700;line-height:1;color:var(--ink);
+  text-shadow:0 0 30px rgba(92,242,198,.22)}
+.stat b .accent{color:var(--em2)}
+.stat-name{font-size:13px;color:var(--mut);font-weight:500}
+.stat-tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--em2)}
+@media(min-width:760px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ============================================================
+   SECTION HEAD
+   ============================================================ */
+.sec-head{max-width:760px;margin-bottom:48px}
+.sec-head .tag{margin-bottom:16px}
+.sec-head h2{margin-bottom:16px}
+.sec-head .lead{margin:0}
+.sec-head .num{font-family:var(--mono);color:var(--dim)}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{display:grid;gap:30px;align-items:center;margin-bottom:48px}
+@media(min-width:900px){.about-grid{grid-template-columns:.85fr 1.15fr;gap:54px}}
+.portrait{position:relative;padding:0;overflow:hidden;border-radius:20px}
+.portrait img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.portrait::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 38%, rgba(7,10,18,.94));pointer-events:none}
+.portrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 20px;z-index:2}
+.portrait figcaption b{display:block;font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
+.portrait figcaption span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--em2)}
+.portrait .corner{position:absolute;top:14px;left:14px;z-index:2;font-family:var(--mono);
+  font-size:10px;letter-spacing:.18em;color:var(--ink);padding:6px 11px;border-radius:8px;
+  border:1px solid var(--line2);background:rgba(7,10,18,.55);backdrop-filter:none}
+.about-copy h2{margin:14px 0 16px}
+.about-copy .lead{margin:0 0 8px}
+
+.promises{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);margin-bottom:36px}
+.promise{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:26px 6px;
+  border-bottom:1px solid var(--line);transition:transform .35s cubic-bezier(.22,1,.36,1), background .35s}
+.promise:hover{transform:translate3d(8px,0,0);background:linear-gradient(90deg, rgba(15,227,163,.06), transparent)}
+.p-num{font-family:var(--mono);font-size:clamp(1.6rem,5vw,2.2rem);font-weight:700;color:var(--dim);
+  line-height:1;transition:color .35s, text-shadow .35s}
+.promise:hover .p-num{color:var(--em2);text-shadow:0 0 26px rgba(92,242,198,.45)}
+.promise h3{margin-bottom:7px}
+.promise p{color:var(--mut);font-size:15px;max-width:60ch}
+
+.declaration{position:relative;padding:30px 26px 30px 30px;overflow:hidden}
+.declaration::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--em2),var(--ice));box-shadow:0 0 18px var(--glow-em)}
+.declaration .tag{margin-bottom:14px}
+.declaration p{font-family:var(--display);font-size:clamp(1.2rem,4vw,1.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.3;max-width:30ch}
+.declaration p .accent{color:var(--em2)}
+
+/* ============================================================
+   SERVICES (bento)
+   ============================================================ */
+.svc-grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:680px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(4,1fr)} .svc.wide{grid-column:span 2}}
+.svc{position:relative;padding:24px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .35s cubic-bezier(.22,1,.36,1), border-color .35s, box-shadow .35s}
+.svc:hover{transform:translate3d(0,-5px,0);border-color:rgba(92,242,198,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 0 30px -6px var(--glow-em), 0 26px 60px -28px rgba(15,227,163,.35)}
+.svc-top{display:flex;align-items:flex-start;justify-content:space-between}
+.svc-ico{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;
+  border:1px solid var(--line);background:rgba(15,227,163,.08);color:var(--em2);
+  transition:box-shadow .35s, color .35s}
+.svc-ico svg{width:26px;height:26px;filter:drop-shadow(0 0 0 transparent);transition:filter .35s}
+.svc:hover .svc-ico{box-shadow:0 0 24px -4px var(--glow-em);color:#BBF7E0}
+.svc:hover .svc-ico svg{filter:drop-shadow(0 0 6px rgba(92,242,198,.65))}
+.svc-num{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em}
+.svc h3{font-size:1.32rem}
+.svc .spec{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--em2);
+  align-self:flex-start;padding:5px 10px;border-radius:7px;border:1px solid rgba(92,242,198,.28);background:rgba(15,227,163,.08)}
+.svc p{color:var(--mut);font-size:14.5px;line-height:1.6}
+
+/* ============================================================
+   ALLIANCE / EMOTIONAL REALITY
+   ============================================================ */
+.alliance-grid{display:grid;gap:34px}
+@media(min-width:980px){.alliance-grid{grid-template-columns:1.1fr .9fr;gap:50px;align-items:start}}
+.alliance-copy h2{margin:14px 0 18px}
+.alliance-copy p{color:var(--mut);margin-bottom:16px;font-size:15.5px;max-width:54ch}
+.alliance-copy p strong{color:var(--ink);font-weight:600}
+.alliance-quote{position:relative;margin-top:26px;padding:24px 24px 24px 28px;border-radius:16px;
+  border:1px solid var(--line);background:linear-gradient(160deg, rgba(15,227,163,.08), rgba(255,255,255,.012));
+  font-family:var(--display);font-size:clamp(1.05rem,3vw,1.32rem);font-weight:600;letter-spacing:-.01em;line-height:1.4}
+.alliance-quote::before{content:"\201C";position:absolute;top:-6px;left:14px;
+  font-family:Georgia,serif;font-size:64px;color:var(--em2);opacity:.45;line-height:1;text-shadow:0 0 22px var(--glow-em)}
+.alliance-side{display:flex;flex-direction:column;gap:16px}
+.truck{position:relative;padding:0;overflow:hidden;border-radius:18px}
+.truck img{aspect-ratio:16/10;object-fit:cover}
+.truck::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(7,10,18,.85));pointer-events:none}
+.truck figcaption{position:absolute;left:14px;bottom:14px;z-index:2;font-family:var(--mono);
+  font-size:10px;letter-spacing:.16em;color:#BBF7E0;padding:7px 12px;border-radius:8px;
+  border:1px solid rgba(92,242,198,.34);background:rgba(7,10,18,.5)}
+.route-card{padding:22px}
+.rc-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;color:var(--dim);margin-bottom:22px}
+.rc-head .rc-live{color:var(--em2)}
+.route{position:relative;margin-bottom:22px}
+.route-line{position:absolute;top:9px;left:8px;right:8px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.route-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--em),var(--ice));
+  transform-origin:left;animation:routeFill 5.5s ease-in-out infinite}
+@keyframes routeFill{0%{transform:scaleX(0)}50%{transform:scaleX(1)}85%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.route-nodes{display:flex;justify-content:space-between;position:relative}
+.node{display:flex;flex-direction:column;align-items:center;gap:9px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.08em;color:var(--mut)}
+.node i{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:var(--bg0);
+  position:relative;animation:nodePulse 5.5s ease-in-out infinite}
+.node:nth-child(1) i{animation-delay:0s}.node:nth-child(2) i{animation-delay:1.3s}
+.node:nth-child(3) i{animation-delay:2.6s}.node:nth-child(4) i{animation-delay:3.9s}
+.node.home i{border-radius:4px;border-color:var(--ice)}
+@keyframes nodePulse{0%,100%{box-shadow:0 0 0 0 rgba(15,227,163,0)}15%{box-shadow:0 0 0 6px rgba(15,227,163,.2);border-color:var(--em2)}40%{box-shadow:0 0 0 0 rgba(15,227,163,0)}}
+.route-tags{display:flex;flex-wrap:wrap;gap:8px}
+.route-tags li{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--mut);
+  padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.route-tags li b{color:var(--em2);margin-right:5px}
+
+/* ============================================================
+   FEE CALCULATOR
+   ============================================================ */
+.fee-grid{display:grid;gap:18px}
+@media(min-width:980px){.fee-grid{grid-template-columns:1.15fr .85fr;align-items:start}}
+.calc{padding:26px 24px}
+.calc-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--dim)}
+.calc-value{font-family:var(--mono);font-size:clamp(2.5rem,9vw,3.6rem);font-weight:700;line-height:1;
+  margin:8px 0 22px;letter-spacing:-.02em;text-shadow:0 0 30px rgba(92,242,198,.25)}
+.calc-value small{font-size:14px;color:var(--dim);font-weight:500;margin-left:6px;letter-spacing:0;text-shadow:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;
+  background:linear-gradient(90deg, var(--em) 0, var(--em2) var(--pct,61%), rgba(255,255,255,.09) var(--pct,61%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #EFFFF8, #5CF2C6 48%, #0FE3A3);
+  margin-top:-10px;border:2px solid rgba(255,255,255,.92);
+  box-shadow:0 0 0 6px rgba(15,227,163,.18), 0 0 22px var(--glow-em), 0 4px 16px rgba(15,227,163,.55)}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:rgba(255,255,255,.09)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--em),var(--em2))}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#5CF2C6;
+  border:2px solid rgba(255,255,255,.92);box-shadow:0 0 0 6px rgba(15,227,163,.18)}
+.calc-range{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin-top:4px}
+.tier-chip{display:flex;align-items:center;gap:10px;margin:22px 0 18px;padding:12px 16px;border-radius:12px;
+  border:1px solid rgba(92,242,198,.34);background:rgba(15,227,163,.10);box-shadow:0 0 22px -8px var(--glow-em)}
+.tier-chip i{width:9px;height:9px;border-radius:50%;background:var(--em2);box-shadow:0 0 10px var(--em2)}
+.tier-chip span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#BBF7E0;flex:1}
+.tier-chip b{font-family:var(--mono);font-size:20px;color:var(--em2)}
+.split-bar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.06);
+  border:1px solid var(--line)}
+.split-bar .keep{background:linear-gradient(90deg,#0FE3A3,#5CF2C6);transition:width .4s cubic-bezier(.22,1,.36,1)}
+.split-bar .fee{background:linear-gradient(90deg,#45C4FF,#7DD8FF);transition:width .4s cubic-bezier(.22,1,.36,1)}
+.calc-legend{display:flex;gap:18px;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--dim)}
+.calc-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:0}
+.calc-legend .lk{background:var(--em2)}.calc-legend .lf{background:var(--ice)}
+.calc-rows{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.crow{padding:16px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.crow span{display:block;font-size:11px;color:var(--dim);letter-spacing:.04em;margin-bottom:6px}
+.crow b{font-family:var(--mono);font-size:clamp(1.3rem,5vw,1.7rem);font-weight:700}
+.crow.keep b{color:var(--em2);text-shadow:0 0 16px rgba(92,242,198,.3)}.crow.fee b{color:var(--ice);text-shadow:0 0 16px rgba(69,196,255,.3)}
+.calc-note{margin-top:20px;font-size:13.5px;color:var(--mut);line-height:1.6;
+  padding-top:18px;border-top:1px solid var(--line)}
+.calc-note strong{color:var(--ink)}
+
+.fee-side{display:flex;flex-direction:column;gap:18px}
+.tiers{padding:8px}
+.tier-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:11px;border:1px solid transparent;transition:background .3s, border-color .3s}
+.tier-row + .tier-row{margin-top:2px}
+.tier-row .t-range{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.tier-row .t-name{font-size:12px;font-weight:600;color:var(--mut);letter-spacing:.02em;text-align:right}
+.tier-row .t-pct{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ink);min-width:42px;text-align:right}
+.tier-row.active{border-color:rgba(92,242,198,.45);background:rgba(15,227,163,.10);box-shadow:0 0 22px -10px var(--glow-em)}
+.tier-row.active .t-range{color:#BBF7E0}.tier-row.active .t-name{color:var(--ink)}
+.tier-row.active .t-pct{color:var(--em2)}
+.tier-row.permit-row{margin-top:6px;border-top:1px solid var(--line);border-radius:0 0 11px 11px}
+.tier-row.permit-row .t-pct{color:var(--ice)}
+
+.permit{padding:26px 24px;position:relative;overflow:hidden}
+.permit::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 60% at 100% 0%, rgba(69,196,255,.12), transparent 60%)}
+.permit-zero{font-family:var(--mono);font-size:clamp(2.6rem,9vw,3.4rem);font-weight:700;color:var(--ice);line-height:1;letter-spacing:-.02em;text-shadow:0 0 30px var(--glow-ice)}
+.permit-zero small{display:block;font-size:11px;letter-spacing:.2em;color:var(--dim);font-weight:500;margin-top:6px;text-shadow:none}
+.permit h3{margin:16px 0 10px;font-size:1.3rem}
+.permit p{color:var(--mut);font-size:14.5px;line-height:1.6;margin-bottom:18px}
+.permit-tags{display:flex;flex-wrap:wrap;gap:8px}
+.permit-tags span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mut);
+  padding:7px 11px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.permit-tags span.zero{color:var(--ice);border-color:rgba(69,196,255,.34);background:rgba(69,196,255,.10)}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid{display:grid;gap:34px}
+@media(min-width:980px){.contact-grid{grid-template-columns:.95fr 1.05fr;gap:54px;align-items:start}}
+.c-info h2{margin:14px 0 16px}
+.c-info > p{color:var(--mut);margin-bottom:28px;max-width:46ch}
+.c-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.c-list li{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.c-list li > span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.c-list li b{color:var(--ink);font-weight:700}
+.c-list li a{color:var(--em2);font-weight:600;word-break:break-word}
+.c-list li .sub{color:var(--mut);font-size:13.5px}
+
+.c-form{padding:26px 22px}
+@media(min-width:600px){.c-form{padding:32px}}
+.form-body{display:grid;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:12.5px;font-weight:600;color:var(--mut);letter-spacing:.01em}
+.field label i{color:var(--em2);font-style:normal}
+.field input,.field select,.field textarea{
+  width:100%;min-height:52px;padding:0 16px;border-radius:12px;
+  border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--ink);
+  font-family:var(--sans);font-size:15px;transition:border-color .2s, box-shadow .2s, background .2s}
+.field textarea{min-height:108px;padding:14px 16px;resize:vertical;line-height:1.5}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:rgba(92,242,198,.55);background:rgba(15,227,163,.05);
+  box-shadow:0 0 0 3px rgba(15,227,163,.14);outline:none}
+.field select{-webkit-appearance:none;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.field select option{background:#0A0F1B;color:var(--ink)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{
+  border-color:var(--rose);box-shadow:0 0 0 3px rgba(251,113,133,.14)}
+.field.valid input,.field.valid select{border-color:rgba(92,242,198,.45)}
+.f-err{display:none;font-size:12px;color:#FDA4AF;font-family:var(--mono);letter-spacing:.02em}
+.field.invalid .f-err{display:block}
+.form-row{display:grid;gap:16px}
+@media(min-width:560px){.form-row{grid-template-columns:1fr 1fr}}
+.c-form .btn{width:100%;margin-top:6px}
+.form-success{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:30px 10px}
+.c-form.sent .form-body{display:none}
+.c-form.sent .form-success{display:flex;animation:pop .5s cubic-bezier(.22,1,.36,1)}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.ok-ring{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(15,227,163,.14);border:1px solid rgba(92,242,198,.45);color:var(--em2);box-shadow:0 0 30px -6px var(--glow-em)}
+.ok-ring svg{width:30px;height:30px}
+.form-success h3{font-size:1.4rem}
+.form-success p{color:var(--mut);max-width:34ch}
+.shake{animation:shake .45s}
+@keyframes shake{10%,90%{transform:translate3d(-2px,0,0)}20%,80%{transform:translate3d(4px,0,0)}30%,50%,70%{transform:translate3d(-7px,0,0)}40%,60%{transform:translate3d(7px,0,0)}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding-block:64px 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(92,242,198,.5),rgba(69,196,255,.4),transparent)}
+.foot-grid{display:grid;gap:38px;margin-bottom:48px}
+@media(min-width:820px){.foot-grid{grid-template-columns:1.6fr 1fr 1fr;gap:48px}}
+.foot-word{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.3rem);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-bottom:16px}
+.foot-word em{font-style:normal;color:var(--em2);font-size:.62em;vertical-align:2px;margin:0 4px;text-shadow:0 0 22px rgba(92,242,198,.4)}
+.foot-brand p{color:var(--mut);font-size:14.5px;max-width:42ch;margin-bottom:22px}
+.foot-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);margin-bottom:16px;text-transform:uppercase}
+.foot-col a{display:block;color:var(--mut);font-size:14px;padding:7px 0;transition:color .2s, transform .2s}
+.foot-col a:hover{color:var(--em2);transform:translate3d(4px,0,0)}
+.foot-bottom{display:flex;flex-direction:column;gap:6px;padding-top:26px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim);line-height:1.7}
+.foot-bottom .accent{color:var(--em2)}
+
+/* ============================================================
+   STICKY DOCK (mobile)
+   ============================================================ */
+.dock{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:90;
+  transform:translate3d(0,150%,0);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.dock.show{transform:translate3d(0,0,0)}
+.dock .btn{width:100%;box-shadow:0 14px 44px -10px rgba(15,227,163,.6), 0 6px 24px rgba(0,0,0,.55)}
+@media(min-width:1024px){.dock{display:none}}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ambient layers -->
+<div class="ambient" aria-hidden="true"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="orb a" aria-hidden="true"></div>
+<div class="orb b" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Jon the Dispatcher — home">
+        <span class="brand-mark">JT</span>
+        <span class="brand-text">JON<em>THE</em>DISPATCHER<span>DALLAS · OPEN DECK</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#alliance">The Alliance</a>
+        <a href="#fee">The Fee</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <a class="btn btn-primary btn-sm nav-cta" href="#contact">Onboard</a>
+        <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+      </div>
+    </div>
+    <div class="mmenu" id="mmenu">
+      <a href="#about" data-i="01">About</a>
+      <a href="#services" data-i="02">Services</a>
+      <a href="#alliance" data-i="03">The Alliance</a>
+      <a href="#fee" data-i="04">The Fee</a>
+      <a href="#contact" data-i="05">Contact</a>
+      <a class="btn btn-primary" href="#contact">Partner Up</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero pad" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow">// OPEN DECK DISPATCH · 48 STATES · 24/7</div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="status rv"><span class="pulse-dot"></span>DALLAS, TX · OPEN DECK ONLY · 24/7</span>
+        <h1 class="rv" style="--d:.05s">Heavy Haul.<br><span class="line2">Done Right.</span></h1>
+        <p class="hero-sub rv" style="--d:.1s">I guard the board.<span class="pipe">·</span>You guard the wheel.</p>
+        <p class="hero-intro rv" style="--d:.15s">I'm Jonathan — your silent partner behind the load screen. While you're strapped to the wheel for eleven hours a day, I'm watching the board so the best flatbed, step deck &amp; heavy-haul freight never slips past you in the three minutes it takes to vanish.</p>
+        <div class="hero-cta rv" style="--d:.2s">
+          <a class="btn btn-primary" href="#contact">Partner With Jon
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#fee">See The Alliance Fee</a>
+        </div>
+        <div class="pills rv" style="--d:.25s">
+          <span class="pill"><i></i><b>3</b> CARRIERS MAX</span>
+          <span class="pill ice"><i></i><b>$0</b> PERMIT FEES</span>
+          <span class="pill"><i></i><b>48</b> STATES</span>
+          <span class="pill ice"><i></i><b>24/7</b> ON THE BOARD</span>
+        </div>
+      </div>
+
+      <!-- live dispatch console -->
+      <div class="console glass rv" style="--d:.18s">
+        <div class="console-top">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="console-title">dispatch_console</span>
+          <span class="live-chip"><span class="pulse-dot"></span>BOARD LIVE</span>
+        </div>
+        <div class="lanes" id="lanes">
+          <div class="lane" data-rate="3.40">
+            <div class="lane-route"><b>DAL</b><span>→</span><b>PHX</b></div>
+            <div class="lane-rate"><span class="rate">$3.40</span><small>/mi</small></div>
+            <div class="lane-side"><span class="chip booked">BOOKED</span><span class="lane-type">FLATBED</span></div>
+          </div>
+          <div class="lane" data-rate="3.10">
+            <div class="lane-route"><b>HOU</b><span>→</span><b>DEN</b></div>
+            <div class="lane-rate"><span class="rate">$3.10</span><small>/mi</small></div>
+            <div class="lane-side"><span class="chip live">LIVE</span><span class="lane-type">STEP DECK</span></div>
+          </div>
+          <div class="lane" data-rate="4.20">
+            <div class="lane-route"><b>DFW</b><span>→</span><b>LAX</b></div>
+            <div class="lane-rate"><span class="rate">$4.20</span><small>/mi</small></div>
+            <div class="lane-side"><span class="chip hot">HOT</span><span class="lane-type">RGN PICKUP</span></div>
+          </div>
+        </div>
+        <div class="console-checks">
+          <span>PERMIT<b>✓</b></span><span>ESCORT<b>✓</b></span><span>RATE CHECK<b>✓</b></span><span>LANE LOCKED<b>✓</b></span><span>DEADHEAD<b>0</b></span>
+        </div>
+        <div class="console-foot">
+          <div class="avg"><b>+18%</b><span>vs. Spot Avg</span></div>
+          <div class="ahead">
+            <span class="ahead-label">3 LOADS AHEAD</span>
+            <div class="mini-route"><i></i><i></i><i></i><i class="home"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="tset">
+      <span>FLATBED</span><i>◆</i><span>STEP DECK</span><i>◆</i><span>LOWBOY</span><i>◆</i><span>RGN / HEAVY HAUL</span><i>◆</i><span>HOTSHOT</span><i>◆</i><span>CONESTOGA</span><i>◆</i><span>FREE PERMIT BOOKING</span><i>◆</i><span>OVERSIZE &amp; OVER-DIMENSIONAL</span><i>◆</i>
+    </div>
+    <div class="tset">
+      <span>FLATBED</span><i>◆</i><span>STEP DECK</span><i>◆</i><span>LOWBOY</span><i>◆</i><span>RGN / HEAVY HAUL</span><i>◆</i><span>HOTSHOT</span><i>◆</i><span>CONESTOGA</span><i>◆</i><span>FREE PERMIT BOOKING</span><i>◆</i><span>OVERSIZE &amp; OVER-DIMENSIONAL</span><i>◆</i>
+    </div>
+  </div>
+</div>
+
+<!-- ================= STATS ================= -->
+<section class="stats" aria-label="By the numbers">
+  <div class="stats-grid">
+    <div class="stat rv"><b><span data-count="3">0</span></b><span class="stat-name">Carriers, Max</span><span class="stat-tag">OBSESSION &gt; VOLUME</span></div>
+    <div class="stat rv" style="--d:.08s"><b><span data-count="48">0</span></b><span class="stat-name">States Covered</span><span class="stat-tag">COAST TO COAST</span></div>
+    <div class="stat rv" style="--d:.16s"><b>$<span data-count="0">0</span></b><span class="stat-name">Permit Fees</span><span class="stat-tag">I BOOK THEM FREE</span></div>
+    <div class="stat rv" style="--d:.24s"><b><span data-count="24" data-suffix="/7">0</span></b><span class="stat-name">On The Board</span><span class="stat-tag">ALWAYS WATCHING</span></div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="pad">
+  <div class="wrap">
+    <div class="about-grid">
+      <figure class="portrait glass rv">
+        <span class="corner">THE IRON</span>
+        <img src="https://image.qwenlm.ai/public_source/3bed7f4e-f41f-436c-af01-e54887747de9/1e72907a7-785e-4fae-bb12-1aa4b77a65e0.png" alt="Heavy-duty flatbed semi truck loaded with steel coils on a Texas highway at night, emerald and cyan rim lighting" loading="lazy" />
+        <figcaption><b>Open Deck · Heavy Haul</b><span>Flatbed · Step Deck · Lowboy · RGN — Dallas, TX</span></figcaption>
+      </figure>
+      <div class="about-copy">
+        <span class="tag rv">// WHO'S BEHIND THE BOARD</span>
+        <h2 class="rv" style="--d:.05s">Not a volume shop. Not an ex-salesman clicking a mouse for a quick percentage.</h2>
+        <p class="lead rv" style="--d:.1s">I'm a weight-bearer — a silent partner who slows the process down enough to think, analyze, and protect your position, financially and mentally.</p>
+      </div>
+    </div>
+
+    <ol class="promises">
+      <li class="promise rv">
+        <span class="p-num">01</span>
+        <div>
+          <h3>Three carriers. That's the ceiling.</h3>
+          <p>Volume and quality are in structural tension. Every truck added to a roster is a fraction less attention on your lanes. I built the opposite.</p>
+        </div>
+      </li>
+      <li class="promise rv" style="--d:.06s">
+        <span class="p-num">02</span>
+        <div>
+          <h3>I'll make 20 extra calls for 20¢/mile.</h3>
+          <p>Booking a load isn't a talent — grinding out the rate is. I don't rush one truck off the phone to jump to the next.</p>
+        </div>
+      </li>
+      <li class="promise rv" style="--d:.12s">
+        <span class="p-num">03</span>
+        <div>
+          <h3>Your truck isn't iron — it's your retirement.</h3>
+          <p>It's the bet you made on yourself. You deserve somebody who takes that as seriously as you do.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="declaration glass rv">
+      <span class="tag">THE DECLARATION OF INDEPENDENCE</span>
+      <p>You didn't buy that rig to get a new boss. <span class="accent">I stay out of your hair and keep the pipeline full.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag rv">// 02 — WHAT WE MOVE</span>
+      <h2 class="rv" style="--d:.05s">Open Deck, End&nbsp;to&nbsp;End.</h2>
+      <p class="lead rv" style="--d:.1s">100% specialized on open deck freight. I know the lanes, the brokers, the weight laws by state, and the seasonal patterns cold — so generalist dispatchers simply can't move you the way I do.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc glass wide rv">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 19h23"/><path d="M25 19v-7h-5l-2.5 3.5"/><path d="M2 19v-4h3"/><circle cx="7" cy="23.5" r="2.6"/><circle cx="20" cy="23.5" r="2.6"/><circle cx="26" cy="23.5" r="2.6"/></svg></span>
+          <span class="svc-num">01</span>
+        </div>
+        <h3>Flatbed</h3>
+        <span class="spec">48FT · 53FT</span>
+        <p>Steel, lumber, machinery — we maximize every mile with top-tier rate negotiation and zero deadhead traps.</p>
+      </article>
+
+      <article class="svc glass rv" style="--d:.05s">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14h9v5h13"/><path d="M24 19v-6h-4l-2 3"/><circle cx="6" cy="23" r="2.6"/><circle cx="15" cy="23" r="2.4"/><circle cx="25" cy="23" r="2.4"/></svg></span>
+          <span class="svc-num">02</span>
+        </div>
+        <h3>Step Deck</h3>
+        <span class="spec">OVERHEIGHT FREIGHT</span>
+        <p>The loads a standard flatbed can't legally touch. Placed precisely, permitted correctly, every single time.</p>
+      </article>
+
+      <article class="svc glass rv" style="--d:.1s">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h6l2 6h9l2-6h5"/><path d="M26 13v-5h-4l-2 3"/><circle cx="10" cy="23" r="2.6"/><circle cx="16" cy="23" r="2.6"/><circle cx="26" cy="23" r="2.6"/></svg></span>
+          <span class="svc-num">03</span>
+        </div>
+        <h3>Lowboy</h3>
+        <span class="spec">HEAVY EQUIPMENT</span>
+        <p>Construction iron, mining machinery, industrial equipment. We know the weight laws cold — by state.</p>
+      </article>
+
+      <article class="svc glass wide rv">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h17c0-6 4-9 9-9"/><path d="M28 12V8h-4"/><circle cx="6" cy="25" r="2.4"/><circle cx="13" cy="25" r="2.4"/><circle cx="24" cy="25" r="2.4"/></svg></span>
+          <span class="svc-num">04</span>
+        </div>
+        <h3>RGN / Gooseneck</h3>
+        <span class="spec">SUPER HEAVY</span>
+        <p>The heaviest, tallest loads on the continent. Permits handled, escorts arranged, drama-free delivery.</p>
+      </article>
+
+      <article class="svc glass rv" style="--d:.05s">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h13l3-4h-5l-2-3h-9z"/><path d="M3 12h7M2 16h6M4 20h4"/><circle cx="15" cy="23" r="2.4"/><circle cx="24" cy="23" r="2.4"/></svg></span>
+          <span class="svc-num">05</span>
+        </div>
+        <h3>Hotshot</h3>
+        <span class="spec">EXPEDITED</span>
+        <p>Speed is the product. Dually &amp; gooseneck loaded fast, revenue per mile kept strong on tight deadlines.</p>
+      </article>
+
+      <article class="svc glass rv" style="--d:.1s">
+        <div class="svc-top">
+          <span class="svc-ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19v-5a8 8 0 0 1 16 0v5"/><path d="M2 19h24"/><path d="M8 19v-9.5M12 19V7.5M16 19v-10M20 19v-9.5"/><circle cx="7" cy="23" r="2.2"/><circle cx="19" cy="23" r="2.2"/></svg></span>
+          <span class="svc-num">06</span>
+        </div>
+        <h3>Conestoga</h3>
+        <span class="spec">WEATHER-PROTECTED</span>
+        <p>Rolling tarp protection for sensitive flatbed cargo. The loads others miss — we find, book &amp; deliver.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALLIANCE / EMOTIONAL REALITY ================= -->
+<section id="alliance" class="pad">
+  <div class="wrap">
+    <div class="alliance-grid">
+      <div class="alliance-copy">
+        <span class="tag rv">// 03 — THE EMOTIONAL REALITY</span>
+        <h2 class="rv" style="--d:.05s">The supply chain doesn't care about your&nbsp;paycheck.</h2>
+        <p class="rv" style="--d:.1s">The shippers don't care. The brokers don't care. Nobody in this chain gives a damn if you make money or go broke. The shipper just wants freight moved fast and cheap — and they use brokers so they never have to deal with you directly.</p>
+        <p class="rv" style="--d:.15s"><strong>That gap is exactly where I live.</strong> I'm not here to move you for a quick cut. I put real effort into the quality of every move — someone who slows down enough to look out for your position, both financially and mentally.</p>
+        <blockquote class="alliance-quote rv" style="--d:.2s">Think of me as your silent partner. You keep 100% of the control — I just keep the pipeline full.</blockquote>
+      </div>
+
+      <div class="alliance-side">
+        <figure class="truck glass rv">
+          <img src="https://image.qwenlm.ai/public_source/3bed7f4e-f41f-436c-af01-e54887747de9/158295b4a-05fb-443d-aad6-515b32d00907.png" alt="Flatbed semi truck hauling steel coils on a Texas highway at dusk" loading="lazy" />
+          <figcaption>ON THE ROAD · 48 STATES</figcaption>
+        </figure>
+        <div class="route-card glass rv" style="--d:.08s">
+          <div class="rc-head"><span>LANE PLANNING</span><span class="rc-live">3 LOADS AHEAD</span></div>
+          <div class="route">
+            <div class="route-line"></div>
+            <div class="route-nodes">
+              <span class="node"><i></i>PICKUP</span>
+              <span class="node"><i></i>LOAD 2</span>
+              <span class="node"><i></i>LOAD 3</span>
+              <span class="node home"><i></i>HOME</span>
+            </div>
+          </div>
+          <ul class="route-tags">
+            <li><b>✓</b>Loaded miles</li>
+            <li><b>✓</b>Backhaul built-in</li>
+            <li><b>✓</b>No dead-zone dump</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEE ================= -->
+<section id="fee" class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag rv">// 04 — THE ALLIANCE FEE</span>
+      <h2 class="rv" style="--d:.05s">We eat what&nbsp;we&nbsp;kill.</h2>
+      <p class="lead rv" style="--d:.1s">No flat milking rate. My fee is tied to your weekly gross — and it drops the moment your gross drops. Drag the slider. Watch our interests line up.</p>
+    </div>
+
+    <div class="fee-grid">
+      <!-- calculator -->
+      <div class="calc glass rv">
+        <label class="calc-label" for="gross">YOUR WEEKLY GROSS</label>
+        <div class="calc-value">$<span id="grossVal">8,500</span><small>/week</small></div>
+        <input type="range" id="gross" min="3000" max="12000" step="100" value="8500" aria-label="Your weekly gross in dollars" />
+        <div class="calc-range"><span>$3,000</span><span>$12,000</span></div>
+
+        <div class="tier-chip"><i></i><span id="tierName">HIGH EFFICIENCY</span><b id="tierPct">7%</b></div>
+
+        <div class="split-bar"><span class="keep" id="barKeep" style="width:93%"></span><span class="fee" id="barFee" style="width:7%"></span></div>
+        <div class="calc-legend"><span><i class="lk"></i>YOU TAKE HOME</span><span><i class="lf"></i>JON'S FEE</span></div>
+
+        <div class="calc-rows">
+          <div class="crow keep"><span>You take home</span><b id="keepVal">$7,905</b></div>
+          <div class="crow fee"><span>Jon's fee</span><b id="feeVal">$595</b></div>
+        </div>
+
+        <p class="calc-note">If I lift your week by just <strong>$1,000–$1,500</strong>, my fee is fully covered and you still come out well ahead. In the brutal weeks, I take the hit right beside you.</p>
+      </div>
+
+      <!-- tiers + permit -->
+      <div class="fee-side">
+        <div class="tiers glass rv" style="--d:.06s">
+          <div class="tier-row" data-tier="TOP TIER TARGET"><span class="t-range">$9,000 – $10,000+</span><span class="t-name">TOP TIER TARGET</span><b class="t-pct">8%</b></div>
+          <div class="tier-row active" data-tier="HIGH EFFICIENCY"><span class="t-range">$8,000 – $8,999</span><span class="t-name">HIGH EFFICIENCY</span><b class="t-pct">7%</b></div>
+          <div class="tier-row" data-tier="BALANCED RUN"><span class="t-range">$7,000 – $7,999</span><span class="t-name">BALANCED RUN</span><b class="t-pct">6%</b></div>
+          <div class="tier-row" data-tier="BASELINE PROTECT"><span class="t-range">$5,000 – $6,999</span><span class="t-name">BASELINE PROTECT</span><b class="t-pct">5%</b></div>
+          <div class="tier-row" data-tier="HARDSHIP FLOOR"><span class="t-range">Under $5,000</span><span class="t-name">HARDSHIP FLOOR</span><b class="t-pct">3%</b></div>
+          <div class="tier-row permit-row"><span class="t-range">EVERY WEEK</span><span class="t-name">PERMIT BOOKING</span><b class="t-pct">$0</b></div>
+        </div>
+
+        <div class="permit glass rv" style="--d:.12s">
+          <div class="permit-zero">$0<small>PERMIT FEES</small></div>
+          <h3>Free permit booking. Always.</h3>
+          <p>Something no standard dispatcher or volume agency will ever offer you. I handle oversize &amp; over-dimensional permits manually, on my dime — so you never pay a third-party permitting agency a single cent. Escorts, routes, state filings: handled.</p>
+          <div class="permit-tags">
+            <span>OVERSIZE</span><span>OVER-DIMENSIONAL</span><span>ESCORTS</span><span>STATE ROUTING</span><span class="zero">$0 TO YOU</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="pad">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="c-info">
+        <span class="tag rv">// 05 — LET'S MOVE FREIGHT</span>
+        <h2 class="rv" style="--d:.05s">Ready to partner?</h2>
+        <p class="rv" style="--d:.1s">Owner-operator or established carrier — drop your info and Jonathan reaches out personally within 24 hours. Let's talk rates, lanes, and what your truck needs to win.</p>
+        <ul class="c-list rv" style="--d:.15s">
+          <li><span>EMAIL</span><a href="mailto:info@jonthedispatcher.com">info@jonthedispatcher.com</a></li>
+          <li><span>BASED IN</span><div><b>Dallas, Texas</b> <span class="sub">— dispatching all 48 contiguous states</span></div></li>
+          <li><span>AVAILABILITY</span><div><b>24 / 7</b> <span class="sub">— always on the board</span></div></li>
+          <li><span>SPECIALIZATION</span><div class="sub">Flatbed · Step Deck · Lowboy · RGN · Hotshot · Conestoga</div></li>
+        </ul>
+      </div>
+
+      <form class="c-form glass rv" id="intakeForm" novalidate>
+        <div class="form-body">
+          <div class="field">
+            <label for="f-name">Full Name <i>*</i></label>
+            <input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+            <span class="f-err"></span>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-phone">Phone <i>*</i></label>
+              <input id="f-phone" name="phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel" />
+              <span class="f-err"></span>
+            </div>
+            <div class="field">
+              <label for="f-email">Email Address <i>*</i></label>
+              <input id="f-email" name="email" type="email" placeholder="you@carrier.com" autocomplete="email" />
+              <span class="f-err"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-trailer">Trailer Type <i>*</i></label>
+              <select id="f-trailer" name="trailer">
+                <option value="">Select type</option>
+                <option>Flatbed (48ft)</option>
+                <option>Flatbed (53ft)</option>
+                <option>Step Deck</option>
+                <option>Lowboy</option>
+                <option>RGN / Removable Gooseneck</option>
+                <option>Hotshot</option>
+                <option>Conestoga</option>
+              </select>
+              <span class="f-err"></span>
+            </div>
+            <div class="field">
+              <label for="f-state">Home State</label>
+              <input id="f-state" name="state" type="text" list="states" placeholder="e.g. Texas" autocomplete="address-level1" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-notes">Notes / Preferred Lanes</label>
+            <textarea id="f-notes" name="notes" placeholder="Lanes you run, equipment details, what you're looking for…"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send My Info
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="form-success" role="status">
+          <div class="ok-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Received!</h3>
+          <p>Jonathan will be in touch shortly. Let's haul together.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <datalist id="states">
+    <option value="Alabama"><option value="Arizona"><option value="Arkansas"><option value="California"><option value="Colorado"><option value="Connecticut"><option value="Delaware"><option value="Florida"><option value="Georgia"><option value="Idaho"><option value="Illinois"><option value="Indiana"><option value="Iowa"><option value="Kansas"><option value="Kentucky"><option value="Louisiana"><option value="Maine"><option value="Maryland"><option value="Massachusetts"><option value="Michigan"><option value="Minnesota"><option value="Mississippi"><option value="Missouri"><option value="Montana"><option value="Nebraska"><option value="Nevada"><option value="New Hampshire"><option value="New Jersey"><option value="New Mexico"><option value="New York"><option value="North Carolina"><option value="North Dakota"><option value="Ohio"><option value="Oklahoma"><option value="Oregon"><option value="Pennsylvania"><option value="Rhode Island"><option value="South Carolina"><option value="South Dakota"><option value="Tennessee"><option value="Texas"><option value="Utah"><option value="Vermont"><option value="Virginia"><option value="Washington"><option value="West Virginia"><option value="Wisconsin"><option value="Wyoming">
+  </datalist>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-word">JON<em>THE</em>DISPATCHER</div>
+        <p>Dedicated open deck dispatching out of Dallas, Texas. Moving the heavy iron that keeps America building — one smart, well-protected mile at a time.</p>
+        <a class="btn btn-primary" href="#contact">Partner With Jon
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <nav class="foot-col" aria-label="Services">
+        <h4>Services</h4>
+        <a href="#services">Flatbed</a>
+        <a href="#services">Step Deck</a>
+        <a href="#services">Lowboy &amp; RGN</a>
+        <a href="#services">Hotshot</a>
+        <a href="#services">Conestoga</a>
+      </nav>
+      <nav class="foot-col" aria-label="Contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@jonthedispatcher.com">info@jonthedispatcher.com</a>
+        <a href="#contact">Dallas, Texas</a>
+        <a href="#contact">Available 24 / 7</a>
+        <a href="#fee">The Alliance Fee</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Jon the Dispatcher · Jonathan Touqeer · Dallas, TX</span>
+      <span>Open Deck · Heavy Haul Specialists · <span class="accent">We eat what we kill.</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= STICKY DOCK ================= -->
+<div class="dock" id="dock">
+  <a class="btn btn-primary" href="#contact">Partner With Jon
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s,r){return (r||document).querySelector(s);};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+
+  /* ---------- NAV: scroll state ---------- */
+  var nav=$('#nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>24); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---------- MOBILE MENU ---------- */
+  var burger=$('#burger'), mmenu=$('#mmenu');
+  function closeMenu(){ mmenu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var open=mmenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open?'true':'false');
+  });
+  $$('#mmenu a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  /* ---------- SCROLL REVEAL ---------- */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el); });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  /* ---------- COUNT UP ---------- */
+  function animateCount(el){
+    var target=parseFloat(el.getAttribute('data-count'))||0;
+    var prefix=el.getAttribute('data-prefix')||'';
+    var suffix=el.getAttribute('data-suffix')||'';
+    if(target===0){ el.textContent=prefix+'0'+suffix; return; }
+    var dur=1400, t0=null;
+    function step(t){
+      if(t0===null) t0=t;
+      var p=Math.min((t-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=prefix+Math.round(target*e)+suffix;
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var cio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
+    }, {threshold:0.5});
+    $$('[data-count]').forEach(function(el){ cio.observe(el); });
+  } else { $$('[data-count]').forEach(animateCount); }
+
+  /* ---------- FEE CALCULATOR ---------- */
+  var gross=$('#gross');
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function tierFor(g){
+    if(g<5000) return {p:3, name:'HARDSHIP FLOOR'};
+    if(g<7000) return {p:5, name:'BASELINE PROTECT'};
+    if(g<8000) return {p:6, name:'BALANCED RUN'};
+    if(g<9000) return {p:7, name:'HIGH EFFICIENCY'};
+    return {p:8, name:'TOP TIER TARGET'};
+  }
+  function updateFee(){
+    var g=parseInt(gross.value,10);
+    var t=tierFor(g);
+    var fee=Math.round(g*t.p/100);
+    var keep=g-fee;
+    $('#grossVal').textContent=fmt(g);
+    $('#tierName').textContent=t.name;
+    $('#tierPct').textContent=t.p+'%';
+    $('#keepVal').textContent='$'+fmt(keep);
+    $('#feeVal').textContent='$'+fmt(fee);
+    var pct=((g-3000)/(12000-3000))*100;
+    gross.style.setProperty('--pct', pct+'%');
+    $('#barKeep').style.width=(100-t.p)+'%';
+    $('#barFee').style.width=t.p+'%';
+    $$('.tier-row').forEach(function(r){
+      r.classList.toggle('active', r.getAttribute('data-tier')===t.name);
+    });
+  }
+  gross.addEventListener('input', updateFee);
+  updateFee();
+
+  /* ---------- LIVE LANE CYCLING ---------- */
+  var lanes=$$('.lane');
+  var tickCount=0;
+  setInterval(function(){
+    if(document.hidden || !lanes.length) return;
+    tickCount++;
+    var idx=Math.floor(Math.random()*lanes.length);
+    var lane=lanes[idx];
+    var rateEl=$('.rate', lane);
+    var base=parseFloat(lane.getAttribute('data-rate'))||3;
+    var nr=base+(Math.random()*0.24-0.12);
+    nr=Math.min(4.9, Math.max(2.6, nr));
+    lane.setAttribute('data-rate', nr.toFixed(2));
+    rateEl.textContent='$'+nr.toFixed(2);
+    lane.classList.add('flash');
+    setTimeout(function(){ lane.classList.remove('flash'); }, 750);
+    if(tickCount%3===0){
+      var chip=$('.chip', lane);
+      if(chip && !chip.classList.contains('hot')){
+        var isLive=chip.textContent.trim()==='LIVE';
+        chip.textContent=isLive?'BOOKED':'LIVE';
+        chip.classList.toggle('live', !isLive);
+        chip.classList.toggle('booked', isLive);
+      }
+    }
+  }, 3200);
+
+  /* ---------- STICKY DOCK ---------- */
+  var dock=$('#dock'), hero=$('#top'), contact=$('#contact');
+  var heroVisible=true, contactVisible=false;
+  function syncDock(){ dock.classList.toggle('show', !heroVisible && !contactVisible); }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ heroVisible=es[0].isIntersecting; syncDock(); }, {threshold:0.08}).observe(hero);
+    new IntersectionObserver(function(es){ contactVisible=es[0].isIntersecting; syncDock(); }, {threshold:0.12}).observe(contact);
+  }
+
+  /* ---------- FORM VALIDATION ---------- */
+  var form=$('#intakeForm'), attempted=false;
+  var validators={
+    name:function(v){ return v.trim().length>=2 || 'Enter your full name.'; },
+    phone:function(v){ return v.replace(/\D/g,'').length>=7 || 'Enter a valid phone number.'; },
+    email:function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Enter a valid email address.'; },
+    trailer:function(v){ return v!=='' || 'Select your trailer type.'; }
+  };
+  function checkField(input){
+    var rule=validators[input.name];
+    if(!rule) return true;
+    var res=rule(input.value);
+    var wrap=input.closest('.field');
+    var err=$('.f-err', wrap);
+    if(res!==true){ wrap.classList.add('invalid'); wrap.classList.remove('valid'); if(err) err.textContent=res; return false; }
+    wrap.classList.remove('invalid'); wrap.classList.add('valid'); if(err) err.textContent=''; return true;
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    attempted=true;
+    var inputs=$$('[name]', form).filter(function(i){ return validators[i.name]; });
+    var ok=true, first=null;
+    inputs.forEach(function(i){ if(!checkField(i)){ ok=false; first=first||i; } });
+    if(!ok){
+      if(first) first.focus();
+      form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+      return;
+    }
+    form.classList.add('sent');
+  });
+  form.addEventListener('input', function(e){ if(attempted && e.target.name) checkField(e.target); });
+  form.addEventListener('blur', function(e){ if(attempted && e.target.name && validators[e.target.name]) checkField(e.target); }, true);
+})();
+</script>
+</body>
+</html>
